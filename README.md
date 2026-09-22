@@ -21,4 +21,4 @@ git clone https://github.com/lindong28/lindong-skills
 
 整仓按 [AGPL-3.0](LICENSE) 分发；`html-imagegen/vendor/guizang/` 为上游 [op7418/guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill) 的字节快照，保留其自带的 LICENSE 与 COMMERCIAL_LICENSING.md，来源与版本见 `html-imagegen/UPSTREAM.md`。
 
-当前镜像自 prompt-templates `aa45f904a8f15e22f7957f9e96c99f9fe932da31`（各 skill 目录的 `.mirror-source` 记录同一值）。
+当前镜像自 prompt-templates `7537f6893124e7bb3f4ed909eee643d9a6d82c6b`（各 skill 目录的 `.mirror-source` 记录同一值）。

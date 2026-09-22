@@ -52,9 +52,34 @@ def _strings(value: object, where: str) -> list[str]:
     return value
 
 
+def assemble_from_sample(inputs: dict) -> str:
+    """沿用模板页某层样例的前三块（角色与任务 / 基本要求 / 视觉要求），只换内容与素材。
+
+    `sample_segments` 直接取站点 API `samples[i].segments`；用户改了尺寸或用途就不该走这条路，
+    改走完整模式重新装配。
+    """
+    segments = inputs.get("sample_segments")
+    if (not isinstance(segments, list) or [s.get("heading") if isinstance(s, dict) else None for s in segments] != list(HEADINGS)
+            or any(not isinstance(s.get("body"), str) or not s["body"].strip() for s in segments)):
+        raise InputError("sample_segments 必须是模板页样例的四块（取自 API samples[].segments）")
+    kept = [segment["body"] if index == 0 else segment["body"][1:] for index, segment in enumerate(segments[:3])]
+    for heading, body in zip(HEADINGS, kept):
+        if not body.startswith(f"# {heading}\n\n"):
+            raise InputError(f"样例四块的「{heading}」段不以其标题开头")
+    template = inputs.get("template_text")
+    if template is not None:
+        template = strip_execution_section(_nonempty(template, "template_text")).strip("\n")
+        if template not in kept[2]:
+            raise InputError("样例的视觉要求里不含这份模板正文——模板与样例不是同一个，或正文被改过")
+    content = _nonempty(inputs.get("content"), "content").strip("\n")
+    return "\n\n".join([*(body.rstrip("\n") for body in kept), f"# {HEADINGS[3]}\n\n{content}"]) + "\n"
+
+
 def assemble(inputs: dict) -> str:
     if not isinstance(inputs, dict):
         raise InputError("inputs 必须是 JSON 对象")
+    if "sample_segments" in inputs:
+        return assemble_from_sample(inputs)
     template = strip_execution_section(_nonempty(inputs.get("template_text"), "template_text")).strip("\n")
     scenario, artifact = inputs.get("scenario"), inputs.get("artifact")
     if not isinstance(scenario, dict) or not isinstance(artifact, dict):

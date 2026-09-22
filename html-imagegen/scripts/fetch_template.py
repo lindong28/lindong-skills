@@ -64,6 +64,15 @@ def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
         for key in ("image_url", "thumbnail_url"):
             if isinstance(hero.get(key), str):
                 hero[key] = urljoin(origin + "/", hero[key])
+    for layer in template.get("samples", []):  # 三层样例：原图、缩略图与实际参考图
+        if not isinstance(layer, dict):
+            continue
+        for key in ("image_url", "thumbnail_url"):
+            if isinstance(layer.get(key), str):
+                layer[key] = urljoin(origin + "/", layer[key])
+        for reference in layer.get("reference_images", []):
+            if isinstance(reference, dict) and isinstance(reference.get("image_url"), str):
+                reference["image_url"] = urljoin(origin + "/", reference["image_url"])
     return data
 
 

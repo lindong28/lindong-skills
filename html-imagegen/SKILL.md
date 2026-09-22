@@ -43,7 +43,7 @@ description: 根据 HTML 图片模板、目标平台（小红书或公众号）�
 
 按四块组织本次真正使用的输入：`# 角色与任务`（场景、交付物）、`# 基本要求`（画幅、格式、语言、完整不透明底板等）、`# 视觉要求`（模板声明的风格和构图）、`# 内容与素材`（本次文字、主体和素材）。依次以空行连接，保存为 `prompt.txt`。完整任务模板已有四块时只填本次输入，不再叠加第二套角色或要求；视觉模块模板则放入视觉要求，只作用于其声明的 controls。保留用户原文与模板约束，不在生成文本中放内部 ID 或 repo 路径。
 
-默认仅用模板 Prompt。用户要求借助示例图片时，按其指定 exemplar，或 API 的 `preview_exemplar_id` 定位网页所见图片，读取该图的 `borrow` 与模板 `non_copy_boundary`，下载查看并作为 HTML 设计参照。不要把 `exemplars[0]` 当作默认参考，也不要把当前 exemplar 当成旧样例的历史输入。保存本次实际文本与参考图关系。
+默认仅用模板 Prompt。用户要求借助示例图片时，按其指定 exemplar，或 API 的 `preview_exemplar_id` 定位该模板 L3 样例实际传入的参考图（网页主图是 L3 输出，另在 `hero_image` 给出，没有 `borrow`），读取参考图的 `borrow` 与模板 `non_copy_boundary`，下载查看并作为 HTML 设计参照。不要把 `exemplars[0]` 当作默认参考，也不要把当前 exemplar 当成旧样例的历史输入。保存本次实际文本与参考图关系。
 
 ## HTML → PNG
 

@@ -59,6 +59,11 @@ def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
     for exemplar in template.get("exemplars", []):
         for key in ("image_url", "thumbnail_url"):
             exemplar[key] = urljoin(origin + "/", exemplar[key])
+    hero = template.get("hero_image")
+    if isinstance(hero, dict):  # 网页主图（L3 输出），与 exemplars[] 同样给绝对地址
+        for key in ("image_url", "thumbnail_url"):
+            if isinstance(hero.get(key), str):
+                hero[key] = urljoin(origin + "/", hero[key])
     return data
 
 

@@ -43,7 +43,7 @@ description: 用 Prompt Planet 多模态模板（视觉要求模块）与用户�
 python3 scripts/assemble_prompt.py inputs.json --out prompt.txt
 ```
 
-- **沿用样例**（默认）：`inputs.json` 只含 `sample_segments`（原样放 API `samples[]` 里所选层的 `segments`）、`content`（本次内容），可选 `template_text`（粘贴的模板正文，脚本核对它逐字在样例的视觉要求里）。输出 = 样例的前三块原文 + 本次内容与素材。
+- **沿用样例**（默认）：`inputs.json` 只含 `sample_segments`（原样放 API `samples[]` 里所选层的 `segments`）、`content`（本次内容），可选 `template_text`（粘贴的模板正文，脚本按去标题、去空白核对它在样例的视觉要求里；核不上只给「提示」不拦——有些样例是按更早措辞的正文生成的，沿用样例仍是页面那张图的作画方式，要按当前正文生成就改走完整模式）。输出 = 样例的前三块原文 + 本次内容与素材。
 - **完整模式**（用户改了用途、尺寸或视觉条件，或没有样例）：字段见 [references/inputs-example.json](references/inputs-example.json)——它是一份完整示例，每个值都要换成本次的；没有的可选字段删掉，不留示例值或占位说明，脚本不识别占位符。
 
 完整模式按四块组织：`# 角色与任务`（角色、场景、任务、读者、交付物）、`# 基本要求`（输出规格 + 场景 / 交付物 / 本次要求）、`# 视觉要求`（模板正文逐字 + 不可复制边界 + 如附参考图的借用说明 + 本次视觉条件）、`# 内容与素材`（内容原文）。模板正文不改写，正文里不放内部 ID 或仓库路径；脚本校验模板正文逐字在场、尺寸为正整数。人工改动 Prompt 时先改 `inputs.json` 再重新装配，不直接改 `prompt.txt`。

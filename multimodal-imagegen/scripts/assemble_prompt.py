@@ -10,6 +10,7 @@ import argparse
 import json
 import math
 import sys
+import warnings
 from pathlib import Path
 
 HEADINGS = ("角色与任务", "基本要求", "视觉要求", "内容与素材")
@@ -18,6 +19,10 @@ EXECUTION_HEADING = "## 执行方式"
 
 class InputError(ValueError):
     pass
+
+
+class TemplateDriftWarning(UserWarning):
+    """沿用样例时，当前模板正文与样例视觉要求措辞不同。"""
 
 
 def strip_execution_section(text: str) -> str:
@@ -36,6 +41,11 @@ def strip_execution_section(text: str) -> str:
     if index < 0:
         raise InputError("模板正文在「执行方式」节之后没有内容")
     return text[index + 2:]
+
+
+def _prose(text: str) -> str:
+    """去掉 `## ` 小标题行与全部空白，只留正文字符——用于"是不是同一份正文"的比对。"""
+    return "".join(line for line in text.splitlines() if not line.startswith("## ")).replace(" ", "").replace("\t", "")
 
 
 def _nonempty(value: object, where: str) -> str:
@@ -68,9 +78,12 @@ def assemble_from_sample(inputs: dict) -> str:
             raise InputError(f"样例四块的「{heading}」段不以其标题开头")
     template = inputs.get("template_text")
     if template is not None:
-        template = strip_execution_section(_nonempty(template, "template_text")).strip("\n")
-        if template not in kept[2]:
-            raise InputError("样例的视觉要求里不含这份模板正文——模板与样例不是同一个，或正文被改过")
+        # 样例是早前生成的：正文后来加过小标题与分段，字面不同、字不变，按去标题、去空白比。
+        # 比不上也不拦：沿用的是真正产出页面那张图的文本，模板正文与它的措辞差异只需让执行者知道。
+        template = strip_execution_section(_nonempty(template, "template_text"))
+        if _prose(template) not in _prose(kept[2]):
+            warnings.warn("模板正文与样例视觉要求的措辞不同（样例是按更早的正文生成的）；本次沿用样例文本，"
+                          "要按当前模板正文生成请改走完整模式", TemplateDriftWarning, stacklevel=2)
     content = _nonempty(inputs.get("content"), "content").strip("\n")
     return "\n\n".join([*(body.rstrip("\n") for body in kept), f"# {HEADINGS[3]}\n\n{content}"]) + "\n"
 
@@ -128,7 +141,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         inputs = json.loads(Path(args.inputs).read_text(encoding="utf-8"))
-        prompt = assemble(inputs)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always", TemplateDriftWarning)
+            prompt = assemble(inputs)
+        for item in caught:
+            print(f"提示：{item.message}", file=sys.stderr)
     except (OSError, ValueError) as error:
         print(f"未装配：{error}", file=sys.stderr)
         return 1

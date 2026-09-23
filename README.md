@@ -7,7 +7,7 @@
 | skill | 说明 | 目录 |
 |---|---|---|
 | `html-imagegen` | 根据 HTML 图片模板、目标平台（小红书或公众号）和用户内容生成封面；按需询问缺失信息并提供模板选项，生成 HTML 后用浏览器导出 PNG。支持本地模板与 Prompt Planet 文本模型模板；图片模型生成或编辑使用独立图片工具。 | [`html-imagegen/`](html-imagegen/) |
-| `multimodal-imagegen` | 用 Prompt Planet 多模态模板（视觉要求模块）与用户内容装配四块完整绘图 Prompt，按需询问缺失信息，交给宿主可用的图片生成工具出图并核验尺寸。文本模型 / HTML 封面模板改用同仓 html-imagegen。 | [`multimodal-imagegen/`](multimodal-imagegen/) |
+| `multimodal-imagegen` | 用 Prompt Planet 多模态模板（视觉要求模块）与用户内容装配四块完整绘图 Prompt，按需询问缺失信息，优先用与站点样例同源的 Codex 内置 image_gen 出图（没有 Codex 就向用户索取服务、凭据与模型），并核验尺寸。文本模型 / HTML 封面模板改用同仓 html-imagegen。 | [`multimodal-imagegen/`](multimodal-imagegen/) |
 
 ## 安装
 
@@ -21,4 +21,4 @@ git clone https://github.com/lindong28/lindong-skills
 
 整仓按 [AGPL-3.0](LICENSE) 分发；`html-imagegen/vendor/guizang/` 为上游 [op7418/guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill) 的字节快照，保留其自带的 LICENSE 与 COMMERCIAL_LICENSING.md，来源与版本见 `html-imagegen/UPSTREAM.md`。
 
-当前镜像自 prompt-templates `ba27d17c4caea0939b1a9e0f3dbce27352e0c185`（各 skill 目录的 `.mirror-source` 记录同一值）。
+当前镜像自 prompt-templates `fe3bb42fa2f7c296ba0d4769879d8b8f13fa0fcc`（各 skill 目录的 `.mirror-source` 记录同一值）。

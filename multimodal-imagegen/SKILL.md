@@ -1,6 +1,6 @@
 ---
 name: multimodal-imagegen
-description: 用 Prompt Planet 多模态模板（视觉要求模块）与用户内容装配四块完整绘图 Prompt，按需询问缺失信息，交给宿主可用的图片生成工具出图并核验尺寸。文本模型 / HTML 封面模板改用同仓 html-imagegen。
+description: 用 Prompt Planet 多模态模板（视觉要求模块）与用户内容装配四块完整绘图 Prompt，按需询问缺失信息，优先用与站点样例同源的 Codex 内置 image_gen 出图（没有 Codex 就向用户索取服务、凭据与模型），并核验尺寸。文本模型 / HTML 封面模板改用同仓 html-imagegen。
 ---
 
 # Multimodal Imagegen
@@ -50,17 +50,31 @@ python3 scripts/assemble_prompt.py inputs.json --out prompt.txt
 
 ## 生成
 
-把 `prompt.txt` 全文交给图片生成工具（附参考图时一并传入，并说明它是风格参照），按可用性依次：
+把 `prompt.txt` 全文交给图片生成工具（附参考图时一并传入，并说明它是风格参照）。**顺序是固定的，不由你临场挑**：
 
-1. 宿主内置或已配置的图片生成工具：Codex 内置 `image_gen`；Claude Code 已接入的图片生成工具或 MCP。
-2. 没有时用随包脚本按 `OPENAI_API_KEY` 调用 OpenAI Images API（默认 `gpt-image-1.5`，可 `--model`；有参考图走 edits 端点）：
-   ```sh
-   python3 scripts/generate_openai.py prompt.txt --out cover-1.png --size 1536x1024 [--reference ref.png]
-   ```
-3. 两者都没有：把 `prompt.txt` 与参考图交给用户，明确说明尚未生成。
+**第 1 顺位：Codex 内置 `image_gen`——与站点样例同源的那条路。** 模板 API 的 `sample_generator` 给出该模板样例实际用的通道与执行配置；按 [codex-image-gen.md](references/codex-image-gen.md) 执行（含失败三分类与「不得改用别的模型或 API 顶替」）。宿主是 Codex、或能派发 Codex 会话时都走这一档。
 
-`inputs.json` 里写了参考图，生成时就必须把同一张图传给工具（脚本路线用 `--reference`）；没传就是另一张图，不能当作附了参考图的结果交付。不为凑工具改写 Prompt；生成参数不是画面内容。输出文件不覆盖，重生成换新文件名；多张只在用户要求时生成。
+**第 2 顺位：没有 Codex 时，停下来问用户。** 不要自行假定任何 API、模型或环境变量——问这三样，一次问齐：
+
+| 要问的 | 说明 |
+|---|---|
+| 用哪个图片生成服务 | OpenAI Images API / 兼容该接口的服务（给 base URL）/ 宿主已接入的图片工具或 MCP（给名字） |
+| 凭据从哪里读 | 环境变量名（如 `OPENAI_API_KEY`），或存放凭据的文件路径。**不读用户没点名的变量或文件**，也不把凭据值回显到对话或日志 |
+| 用哪个模型 | 由用户指定。**没有默认值**：随包脚本不内置模型，站点样例也不是用这条路生成的 |
+
+同时说明一句：这条路**与站点样例不同源**，出来的图在文字渲染等方面可能与模板页上的样例不同。
+
+用户给齐之后，OpenAI 兼容接口可用随包脚本（有参考图走 edits 端点）：
+
+```sh
+python3 scripts/generate_openai.py prompt.txt --out cover-1.png --size 1536x1024 \
+  --model <用户指定的模型> [--api-key-env <用户指定的变量名>] [--base-url <兼容服务地址>] [--reference ref.png]
+```
+
+**第 3 顺位：用户不提供、或两条都走不通**——把 `prompt.txt` 与参考图交给用户，明确说明尚未生成。
+
+`inputs.json` 里写了参考图，生成时就必须把同一张图传给工具（脚本路线用 `--reference`）；没传就是另一张图，不能当作附了参考图的结果交付。不为凑工具改写 Prompt；生成参数不是画面内容。输出文件不覆盖，重生成换新文件名；多张只在用户要求时生成。**交付时写明走的是哪一顺位**——第 2 顺位要连「与样例不同源」一起写。
 
 ## 核验与交付
 
-读取 PNG 实际宽高与 `inputs.json` 的输出尺寸比对（`python3 scripts/check_png.py cover-1.png --expect 1536x1024`）；不符则重新生成或在用户预算内说明，不裁切、缩放或拉伸修补。查看实际图片，核对精确文字、主体与不可复制边界；不符就修正 `inputs.json` 再装配生成，不编辑 PNG。交付 PNG、`prompt.txt` 与参考图关系；一张被接受不代表其它内容已验证。
+读取 PNG 实际宽高与 `inputs.json` 的输出尺寸比对（`python3 scripts/check_png.py cover-1.png --expect 1536x1024`；Codex 路线同样要核）；不符则重新生成或在用户预算内说明，不裁切、缩放或拉伸修补。查看实际图片，核对精确文字、主体与不可复制边界；不符就修正 `inputs.json` 再装配生成，不编辑 PNG。交付 PNG、`prompt.txt` 与参考图关系；一张被接受不代表其它内容已验证。

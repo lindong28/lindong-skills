@@ -7,7 +7,7 @@ import json
 import re
 import sys
 from urllib.error import URLError
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import parse_qs, urljoin, urlsplit
 from urllib.request import Request, urlopen
 
 DEFAULT_SITE = "https://prompts.aiplanet.live"
@@ -37,7 +37,12 @@ def resolve_selection(selection: str, site: str) -> tuple[str, str]:
 
 def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
     origin, slug = resolve_selection(selection, site)
-    endpoint = f"{origin}/api/v1/image/templates/{slug}.json"
+    values = parse_qs(urlsplit(selection).query, keep_blank_values=True).get("variant", [])
+    variant = values[0] if values else None
+    if values and (len(values) != 1 or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*-[0-9a-f]{16}", variant)):
+        raise ValueError("组合链接的 variant 参数不合法或重复，请从模板页重新复制")
+    endpoint = (f"{origin}/api/v1/image/templates/{slug}/variants/{variant}.json" if variant
+                else f"{origin}/api/v1/image/templates/{slug}.json")
     request = Request(endpoint, headers={"Accept": "application/json", "User-Agent": "PromptPlanetSkill/1"})
     with urlopen(request, timeout=30) as response:
         data = json.load(response)
@@ -46,6 +51,8 @@ def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
     template = data["template"]
     if template.get("slug") != slug:
         raise ValueError("站点返回的模板与所选页面不一致")
+    if variant and data.get("variant", {}).get("key") != variant:
+        raise ValueError("站点返回的配色/布局组合与所选版本不一致")
     dependencies = template.get("model_dependencies")
     if not isinstance(dependencies, list) or not dependencies or not set(dependencies) <= {"文本模型", "多模态模型"}:
         raise ValueError("模板缺少受支持的模型依赖，不能确定生成路线")
@@ -54,6 +61,8 @@ def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
         raise ValueError("模板 API 缺少完整 Prompt 正文")
     if prompts and sum(p.get("is_default") is True for p in prompts) != 1:
         raise ValueError("模板默认 Prompt 不明确，停止自动选择")
+    if variant and (len(prompts) != 1 or prompts[0].get("id") != f"prompt:{slug}:{variant}"):
+        raise ValueError("组合的 Prompt 身份与所选版本不一致")
     for key in ("page_url", "api_url"):
         template[key] = urljoin(origin + "/", template[key])
     for exemplar in template.get("exemplars", []):

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "project": "Synthetic console example",
+  "base_url": "http://127.0.0.1:8765",
+  "viewports": [
+    {
+      "id": "wide",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "narrow",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "roles": {
+    "value": {
+      "selector": "dd"
+    },
+    "body": {
+      "selector": "body"
+    },
+    "summary": {
+      "selector": "#summary"
+    },
+    "data": {
+      "selector": "#data"
+    }
+  },
+  "cases": [
+    {
+      "id": "overview",
+      "path": "/fixture.html",
+      "state": "keyboard data open",
+      "ready": "document.querySelector('#ready') !== null",
+      "steps": [
+        {
+          "action": "focus",
+          "args": [
+            "#show-data"
+          ],
+          "reason": "Focus local disclosure; no business write"
+        },
+        {
+          "action": "press",
+          "args": [
+            "Enter"
+          ],
+          "reason": "Toggle local data disclosure",
+          "ready": "!document.querySelector('#data').hidden"
+        }
+      ]
+    }
+  ]
+}

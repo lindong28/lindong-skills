@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "fixture-console-application",
+  "objective": "Verify the complete synthetic console scenario",
+  "application": "scenario",
+  "design": {
+    "path": "effective-design.json",
+    "sha256": "4a35b6b0e53be791ff3a666a2eb0262971092202a35c05ac3961b3cd22b8574d"
+  },
+  "project": {
+    "path": "project.json",
+    "sha256": "d44e1f9f9e2157db95a53861b233eabeec1747b1397422cc98784f38fdaf6d72"
+  }
+}

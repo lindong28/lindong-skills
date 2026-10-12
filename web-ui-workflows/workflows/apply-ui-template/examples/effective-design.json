@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "template": {
+    "id": "fixture-console",
+    "source": "fixture.html (synthetic validation fixture, not a published template)"
+  },
+  "rules": [
+    {
+      "id": "value-size",
+      "role": "value",
+      "kind": "style",
+      "property": "font-size",
+      "expected": "14px",
+      "source": "fixture: value = 14px",
+      "description": "Detail values use the declared font size"
+    },
+    {
+      "id": "neutral",
+      "role": "body",
+      "kind": "style",
+      "property": "background-color",
+      "expected": "rgb(250, 250, 250)",
+      "source": "fixture: neutral background",
+      "description": "Neutral colors are valid when chosen"
+    },
+    {
+      "id": "summary",
+      "role": "summary",
+      "kind": "text",
+      "match": "contains",
+      "expected": "1 failed",
+      "source": "fixture: persistent failure summary",
+      "description": "Failure remains visible after collapse"
+    },
+    {
+      "id": "data",
+      "role": "data",
+      "kind": "count",
+      "expected": 1,
+      "source": "fixture: keyboard data disclosure",
+      "description": "Data table is reachable through a keyboard operation"
+    },
+    {
+      "id": "canvas",
+      "role": "chart",
+      "kind": "manual",
+      "source": "fixture: canvas content",
+      "description": "Read chart labels, not only DOM geometry"
+    }
+  ]
+}

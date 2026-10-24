@@ -22,10 +22,10 @@ def resolve_selection(selection: str, site: str) -> tuple[str, str]:
     if parsed.scheme:
         if parsed.scheme not in ("http", "https") or not parsed.netloc or parsed.username or parsed.password:
             raise ValueError("模板链接必须是无凭据的 HTTP(S) 地址")
-        match = re.fullmatch(r"/image/([a-z0-9-]+)/?", parsed.path)
+        match = re.fullmatch(r"(?P<prefix>/(?:dev/)?releases/[a-z0-9][a-z0-9-]{0,79})?/image/(?P<slug>[a-z0-9-]+)/?", parsed.path)
         if not match:
             raise ValueError("请输入图片模板详情页链接 /image/<slug>/")
-        return f"{parsed.scheme}://{parsed.netloc}", match[1]
+        return f"{parsed.scheme}://{parsed.netloc}{match['prefix'] or ''}", match['slug']
     slug = selection.split(":", 1)[-1]
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
         raise ValueError("模板名称须为页面 slug 或模板 ID")
@@ -44,7 +44,14 @@ def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
     endpoint = (f"{origin}/api/v1/image/templates/{slug}/variants/{variant}.json" if variant
                 else f"{origin}/api/v1/image/templates/{slug}.json")
     request = Request(endpoint, headers={"Accept": "application/json", "User-Agent": "PromptPlanetSkill/1"})
-    with urlopen(request, timeout=30) as response:
+    opener = urlopen
+    if urlsplit(endpoint).path.startswith('/dev/'):
+        try:
+            from private_client import open_url
+        except ImportError:
+            raise ValueError('请使用该开发快照的 skill 包；当前安装不含私有读取客户端') from None
+        opener = open_url
+    with opener(request, timeout=30) as response:
         data = json.load(response)
     if data.get("schema_version") != 1 or not isinstance(data.get("template"), dict):
         raise ValueError("站点返回的模板 API 版本不受支持")

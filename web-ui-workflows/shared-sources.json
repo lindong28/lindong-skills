@@ -1,0 +1,7 @@
+{
+  "references/ui-experience-intent.md": {
+    "repository": "ai-agent-config",
+    "path": "claude/skills/web-ui-workflows/references/ui-experience-intent.md",
+    "sha256": "52342f1abe134eace59cbfafbf5fa96a3ff7309267b303edb9e1a7ba092a6f36"
+  }
+}

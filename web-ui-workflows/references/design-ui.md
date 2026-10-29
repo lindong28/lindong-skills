@@ -290,3 +290,5 @@ agent-browser eval "$(cat ${WEB_UI_SKILL_DIR}/workflows/design-ui/scripts/valida
 - 哪些维度会被评估、以及 target 可以合法地来自哪里 → `${WEB_UI_SKILL_DIR}/references/web-ui-dimension-rubric.md`；本 skill 拥有的是参数，不是 rubric。
 - 主要元素是否真的渲染出来了 → `${WEB_UI_SKILL_DIR}/scripts/page-acceptance`。
 - 由真人进行的多状态真实使用 → `/product-ux-workflows test-ux`。
+
+涉及期望感受、价值理解与下一步行动的对齐、模板选择、设计优化、验收或反馈维护时，先读 [体验意图](ui-experience-intent.md)，接入当前有效设计与本次任务范围；局部修正复用已有意图。

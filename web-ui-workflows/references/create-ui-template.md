@@ -11,7 +11,7 @@ description: "基于用户认可的网站真实 Web UI，独立创建或更新 P
 
 从请求取得参照网站及观察范围、希望提炼的风格或场景、模板仓位置（由用户提供实际路径与访问权限）和已授权产出。复用上下文，只补问会改变结果的缺失信息；来源账号和访问方式留在任务记录，不写入通用 skill 或公开模板。用户只要求研究时交付分析，不自动写入模板。
 
-只应用已有模板走 [apply-ui-template](apply-ui-template.md)；参照网站改造指定产品走 [adapt-reference-ui](adapt-reference-ui.md)，由它按需回传提炼任务。读取、分类、规则合并和入库维护的权威为 [manage-ui-templates](manage-ui-templates.md)；本流程不另建 catalog、模板副本或发布机制。
+只应用已有模板走 [apply-ui-template](apply-ui-template.md)；参照网站改造指定产品走 [adapt-reference-ui](adapt-reference-ui.md)，由它按需回传提炼任务。读取、分类、规则合并和入库维护的权威为 [manage-ui-templates](manage-ui-templates.md)；独立组件样式按 [组件样式与选择](component-styles.md) 接入同一目录，不另建 catalog、模板副本或发布机制。
 
 ## 创建或更新
 

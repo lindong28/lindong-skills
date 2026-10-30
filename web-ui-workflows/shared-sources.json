@@ -3,5 +3,15 @@
     "repository": "ai-agent-config",
     "path": "claude/skills/web-ui-workflows/references/ui-experience-intent.md",
     "sha256": "52342f1abe134eace59cbfafbf5fa96a3ff7309267b303edb9e1a7ba092a6f36"
+  },
+  "references/component-styles.md": {
+    "repository": "ai-agent-config",
+    "path": "claude/skills/web-ui-workflows/references/component-styles.md",
+    "sha256": "3de41d21aff00966cf1f35bcb7ea6310b6f7f53dd032f3048be46395f56d4bc9"
+  },
+  "scripts/component_styles.py": {
+    "repository": "ai-agent-config",
+    "path": "claude/skills/web-ui-workflows/scripts/component_styles.py",
+    "sha256": "b77eec58c3fa6620e29c8879b0d64a52e6ecadc2b8c353954e5f05e0d16e33c7"
   }
 }

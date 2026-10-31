@@ -7,7 +7,7 @@
   "references/component-styles.md": {
     "repository": "ai-agent-config",
     "path": "claude/skills/web-ui-workflows/references/component-styles.md",
-    "sha256": "3de41d21aff00966cf1f35bcb7ea6310b6f7f53dd032f3048be46395f56d4bc9"
+    "sha256": "5f88800b887f44ee6b21afc11a211db3ca6cb8ddeff5a956195aa92de0a08470"
   },
   "scripts/component_styles.py": {
     "repository": "ai-agent-config",

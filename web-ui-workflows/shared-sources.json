@@ -13,5 +13,10 @@
     "repository": "ai-agent-config",
     "path": "claude/skills/web-ui-workflows/scripts/component_styles.py",
     "sha256": "b77eec58c3fa6620e29c8879b0d64a52e6ecadc2b8c353954e5f05e0d16e33c7"
+  },
+  "references/reference-behavior-adaptation.md": {
+    "repository": "ai-agent-config",
+    "path": "claude/skills/web-ui-workflows/references/reference-behavior-adaptation.md",
+    "sha256": "dfa018c32c4d1046235f4b29c24d47bae9aa2fb6efa3463300384bf704333bfa"
   }
 }

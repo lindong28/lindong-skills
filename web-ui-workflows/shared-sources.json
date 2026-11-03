@@ -17,6 +17,6 @@
   "references/reference-behavior-adaptation.md": {
     "repository": "ai-agent-config",
     "path": "claude/skills/web-ui-workflows/references/reference-behavior-adaptation.md",
-    "sha256": "dfa018c32c4d1046235f4b29c24d47bae9aa2fb6efa3463300384bf704333bfa"
+    "sha256": "a54f60f44fdfeb75d339999d3f59e1faec1bffb4527c2835e992d26e80e09af1"
   }
 }

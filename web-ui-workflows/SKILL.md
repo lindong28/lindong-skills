@@ -41,6 +41,8 @@ description: "设计、开发与优化 Web UI：直接按 Prompt Planet 模板�
 
 ## 领域参考
 
+新建、模板应用及相关组件增改时，按 [效果选择](references/effect-selection.md) 主动判断是否需要反馈或动效，并接入同一有效设计；不要求用户点名效果，也不默认添加动画。显式风格、内容可读性与原任务范围优先。
+
 | 当前场景 | 按需正文与入口 |
 | --- | --- |
 | 普通 session 判断页面好不好用或准备宣称可交付 | [web-ui-observation](references/web-ui-observation.md) 的任务范围分流与「交付前的最低证据」；按应用对象验证，不以有参照为条件 |

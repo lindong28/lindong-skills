@@ -1,6 +1,6 @@
 ---
 name: multimodal-imagegen
-description: 用 Prompt Planet 多模态模板（视觉要求模块）与用户内容装配四块完整绘图 Prompt，按需询问缺失信息，优先用与站点样例同源的 Codex 内置 image_gen 出图（没有 Codex 就向用户索取服务、凭据与模型），并核验尺寸。文本模型 / HTML 封面模板改用同仓 html-imagegen。
+description: 用 Template Planet 多模态模板（视觉要求模块）与用户内容装配四块完整绘图 Prompt，按需询问缺失信息，优先用与站点样例同源的 Codex 内置 image_gen 出图（没有 Codex 就向用户索取服务、凭据与模型），并核验尺寸。文本模型 / HTML 封面模板改用同仓 html-imagegen。
 ---
 
 # Multimodal Imagegen

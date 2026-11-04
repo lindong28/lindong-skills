@@ -10,7 +10,7 @@ from urllib.error import URLError
 from urllib.parse import parse_qs, urljoin, urlsplit
 from urllib.request import Request, urlopen
 
-DEFAULT_SITE = "https://prompts.aiplanet.live"
+DEFAULT_SITE = "https://templates.aiplanet.live"
 
 
 def resolve_selection(selection: str, site: str) -> tuple[str, str]:
@@ -93,7 +93,7 @@ def fetch_template(selection: str, site: str = DEFAULT_SITE) -> dict:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="读取 Prompt Planet 模板；标准输出为供 agent 消费的完整 JSON。")
+    parser = argparse.ArgumentParser(description="读取 Template Planet 模板；标准输出为供 agent 消费的完整 JSON。")
     parser.add_argument("template", help="模板详情页 URL、slug 或模板 ID")
     parser.add_argument("--site", default=DEFAULT_SITE, help="使用 slug 时的站点地址")
     args = parser.parse_args()

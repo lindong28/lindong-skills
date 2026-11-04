@@ -1,6 +1,6 @@
 ---
 name: html-imagegen
-description: 根据 HTML 图片模板、目标平台（小红书或公众号）和用户内容生成封面；按需询问缺失信息并提供模板选项，生成 HTML 后用浏览器导出 PNG。支持本地模板与 Prompt Planet 文本模型模板；图片模型生成或编辑使用独立图片工具。
+description: 根据 HTML 图片模板、目标平台（小红书或公众号）和用户内容生成封面；按需询问缺失信息并提供模板选项，生成 HTML 后用浏览器导出 PNG。支持本地模板与 Template Planet 文本模型模板；图片模型生成或编辑使用独立图片工具。
 ---
 
 # HTML Imagegen

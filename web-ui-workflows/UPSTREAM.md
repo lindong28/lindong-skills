@@ -7,3 +7,5 @@
 公开包按分发仓 AGPL-3.0 许可；浏览器依赖 agent-browser 单独按其上游许可安装，不打包用户浏览器状态或凭据。
 
 2026-11-03 从 ai-agent-config 提交 `e55f6ac0eff93be62e3051949a813063b8d57ec2` 增量同步 `claude/skills/web-ui-workflows/references/reference-behavior-adaptation.md`，SHA256 `a54f60f44fdfeb75d339999d3f59e1faec1bffb4527c2835e992d26e80e09af1`。共享正文在 ai-agent-config 维护；本包从参照改进、设计、观察和模板提炼入口条件引用，组件默认与项目实例继续由模板和产品维护。create-ui-template 仅增量补产品验证来源与提炼接入，保留本包的可移植流程；本次分支为开发候选，未据此公开发布。
+
+2026-11-04 公开包将产品名和服务链接迁移为 Template Planet / templates.aiplanet.live。共享方法的行为不变；发生链接适配的文件由 `shared-sources.json` 的 `source_sha256` 保留取得时的上游摘要，`sha256` 表示本包实际分发字节。

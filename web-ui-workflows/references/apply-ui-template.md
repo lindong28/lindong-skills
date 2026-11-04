@@ -1,6 +1,6 @@
 ---
 name: apply-ui-template
-description: "以选定的 Prompt Planet 当前模板优化目标 Web UI，不依赖重新访问商业参照网站。"
+description: "以选定的 Template Planet 当前模板优化目标 Web UI，不依赖重新访问商业参照网站。"
 ---
 
 # 按模板优化 Web UI

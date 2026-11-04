@@ -6,7 +6,7 @@
 
 先确定读者任务、访问阶段、真实内容、已有风格与输入方式，再比较静态呈现和少量有明确用途的候选。吸引探索与快速查数可能需要不同处理；不要由页面名称、关键词或效果热度直接决定。显式风格与项目约束优先，例如风格禁止悬停位移时，不因目录有此效果就加入；已有反馈足够时保持它。
 
-效果目录浏览入口为 `https://prompts.aiplanet.live/webui/effects/`，定义入口为 `/api/webui/effects/v1/index.json`，详情为 `/api/webui/effects/v1/<id>.json`。任务给定开发快照或授权本地模板仓时，沿同版入口读取；本地权威为 `library/webui/effects.json`，可运行示例源在 `library/webui/assets/effects/`。以完整定义的用途、条件、排除项、过程、回退和来源说明判断，不只看名称或截图。详情的 `example_url` 用于隔离预览，`download_url` 提供独立 HTML 包；解压后的 `index.html` 可用定义中的 `example_sha256` 核对，浏览器预览的宿主脚本不属于原始示例。目录摘要绑定定义与可下载示例。
+效果目录浏览入口为 `https://templates.aiplanet.live/webui/effects/`，定义入口为 `/api/webui/effects/v1/index.json`，详情为 `/api/webui/effects/v1/<id>.json`。任务给定开发快照或授权本地模板仓时，沿同版入口读取；本地权威为 `library/webui/effects.json`，可运行示例源在 `library/webui/assets/effects/`。以完整定义的用途、条件、排除项、过程、回退和来源说明判断，不只看名称或截图。详情的 `example_url` 用于隔离预览，`download_url` 提供独立 HTML 包；解压后的 `index.html` 可用定义中的 `example_sha256` 核对，浏览器预览的宿主脚本不属于原始示例。目录摘要绑定定义与可下载示例。
 
 目录不可达或当前发布尚不含效果时，说明该来源未取得；继续依据项目有效设计、已核实参照和当前任务完成可独立完成的设计，不声称已采用目录模板，也不把失败改写为“没有合适效果”。没有匹配项允许保持静态或按已授权目标设计局部效果；可复用提炼仍沿模板维护入口，不能直接把一次尝试变成长期开启的默认。
 

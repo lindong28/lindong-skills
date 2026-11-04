@@ -7,7 +7,8 @@
   "references/component-styles.md": {
     "repository": "ai-agent-config",
     "path": "claude/skills/web-ui-workflows/references/component-styles.md",
-    "sha256": "4b2cea2968f1820502888f25d793d712e1cfb8a7cbee0edda07a2e43f57f85ec"
+    "sha256": "47961afdc668e7fccc55d1bf194d5c6b964588c9fec5b1f59cea90ff22163a8f",
+    "source_sha256": "4b2cea2968f1820502888f25d793d712e1cfb8a7cbee0edda07a2e43f57f85ec"
   },
   "scripts/component_styles.py": {
     "repository": "ai-agent-config",
@@ -22,6 +23,7 @@
   "references/effect-selection.md": {
     "repository": "ai-agent-config",
     "path": "claude/skills/web-ui-workflows/references/effect-selection.md",
-    "sha256": "48ca10859253b50afbdb5ff759ac9bf8617c32f74fc7d57a94753c2aced858ee"
+    "sha256": "0b4cdaca43bb499c2e07301d19f4dbb79e8e04fe197398d3b781f76a626998b3",
+    "source_sha256": "48ca10859253b50afbdb5ff759ac9bf8617c32f74fc7d57a94753c2aced858ee"
   }
 }

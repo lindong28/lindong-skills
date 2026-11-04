@@ -1,11 +1,11 @@
 ---
 name: web-ui-workflows
-description: "设计、开发与优化 Web UI：直接按 Prompt Planet 模板改进页面、组件、主题和布局，无需访问模板来源网站；也可独立从认可的网站真实 Web UI 创建视觉风格或场景模板，或参照产品改造目标 UI。按模板巡查组件覆盖，按需回访来源补充模板；评审设计和可用性、优化图片加载。产品级 UX 试用与验收契约使用 product-ux-workflows。"
+description: "设计、开发与优化 Web UI：直接按 Template Planet 模板改进页面、组件、主题和布局，无需访问模板来源网站；也可独立从认可的网站真实 Web UI 创建视觉风格或场景模板，或参照产品改造目标 UI。按模板巡查组件覆盖，按需回访来源补充模板；评审设计和可用性、优化图片加载。产品级 UX 试用与验收契约使用 product-ux-workflows。"
 ---
 
 # web-ui-workflows
 
-公开分发版保留七个工作流，模板定义仍从 Prompt Planet 当前 API 或用户授权的本地模板仓读取。执行前读 [宿主与运行环境](references/portable-runtime.md)，解析实际目录与工具；无需作者的 user-scope 配置。即使刚取得的 skill 尚未被宿主重新扫描，本次会话仍可直接读取本文件及命中的 reference 执行。
+公开分发版保留七个工作流，模板定义仍从 Template Planet 当前 API 或用户授权的本地模板仓读取。执行前读 [宿主与运行环境](references/portable-runtime.md)，解析实际目录与工具；无需作者的 user-scope 配置。即使刚取得的 skill 尚未被宿主重新扫描，本次会话仍可直接读取本文件及命中的 reference 执行。
 
 按用户所需的任务或产物选择下表中的工作流，只读取命中的正文并遵循其边界；同属一个主题不表示要运行全部阶段。请求不明确时先澄清对象，不默认扩展范围。
 
@@ -29,7 +29,7 @@ description: "设计、开发与优化 Web UI：直接按 Prompt Planet 模板�
 
 产品级真实试用与 UX 验收契约使用 `product-ux-workflows`。按 [UI 规则归属](references/ui-rule-ownership.md) 区分风格、场景与 UX 的默认检查；本次改动造成的视觉、内容与操作回归仍由执行者验证。
 
-“把这个风格应用到整个产品／所有子页面”、“用这个模板优化我的网页”、用户要求按给出的 Prompt Planet Web UI 模板页或复制 Prompt 执行时，进入 `apply-ui-template`；只挑选模板或生成可复制 Prompt 进入 `manage-ui-templates`，只审核进入 `review-ui` 的模板审核分支。模板内容在模板仓，本 skill 不维护项目专属模板副本。
+“把这个风格应用到整个产品／所有子页面”、“用这个模板优化我的网页”、用户要求按给出的 Template Planet Web UI 模板页或复制 Prompt 执行时，进入 `apply-ui-template`；只挑选模板或生成可复制 Prompt 进入 `manage-ui-templates`，只审核进入 `review-ui` 的模板审核分支。模板内容在模板仓，本 skill 不维护项目专属模板副本。
 
 “遍历页面组件，对照模板找未覆盖与未落实项”进入 `review-ui` 的模板审核分支；用户同时要求“在来源网站找参照”时使用该分支的来源研究，不必在 Prompt 中重复来源 URL。明确要求修复时沿同一 findings 交接应用与模板维护；只审核保持只读。
 

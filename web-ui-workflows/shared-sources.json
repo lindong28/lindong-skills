@@ -25,5 +25,10 @@
     "path": "claude/skills/web-ui-workflows/references/effect-selection.md",
     "sha256": "0b4cdaca43bb499c2e07301d19f4dbb79e8e04fe197398d3b781f76a626998b3",
     "source_sha256": "48ca10859253b50afbdb5ff759ac9bf8617c32f74fc7d57a94753c2aced858ee"
+  },
+  "references/design-ui/product-introduction.md": {
+    "repository": "ai-agent-config",
+    "path": "claude/skills/web-ui-workflows/references/design-ui/product-introduction.md",
+    "sha256": "d41fd6b5f1a46bb2f0761cf07dc3c0a58e17b71506e80f1f9c94f075aaf8836d"
   }
 }

@@ -7,6 +7,8 @@ description: "设计、开发与优化 Web UI：直接按 Template Planet 模板
 
 公开分发版保留七个工作流，模板定义仍从 Template Planet 当前 API 或用户授权的本地模板仓读取。执行前读 [宿主与运行环境](references/portable-runtime.md)，解析实际目录与工具；无需作者的 user-scope 配置。即使刚取得的 skill 尚未被宿主重新扫描，本次会话仍可直接读取本文件及命中的 reference 执行。
 
+新建或整体改进单产品宣传首页时，读取 [单产品介绍与上手](references/design-ui/product-introduction.md)，将产品价值、具体场景、设计依据和实际画面衔接起来；局部改动保持原范围，指定品牌与风格继续优先。
+
 按用户所需的任务或产物选择下表中的工作流，只读取命中的正文并遵循其边界；同属一个主题不表示要运行全部阶段。请求不明确时先澄清对象，不默认扩展范围。
 
 主题入口后可带工作流名与参数；工作流名只用于选择正文，其后的内容作为该正文的 `$ARGUMENTS`，位置参数映射为 `$1`..`$9`。自然语言请求同样可选择工作流，不要求旧命令 token。正文中的工具名与运行路径按 [宿主与执行约定](references/portable-runtime.md) 解析。

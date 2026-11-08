@@ -23,7 +23,7 @@ description: "设计、开发与优化 Web UI：直接按 Template Planet 模板
 | `manage-ui-templates` | 挑选、比较、收藏模板，维护复用反馈及产品类评价维度、取向和参照 | 当次选用不等于长期批准；应用到页面时交给 `apply-ui-template` | [references/manage-ui-templates.md](references/manage-ui-templates.md) |
 | `optimize-images` | 引入、替换或优化网页图片及 CSS 背景，检查显示、加载和缓存 | 只处理本次图片；已有合适产物可保留，不自动启动整站设计或性能审计 | [references/optimize-images.md](references/optimize-images.md) |
 
-从上下文取得目标页面或组件、读者任务、已有设计约束及参照；图片任务还需实际资源和显示用途，模板任务需区分当次复用与长期收藏。只补问会影响当前执行的缺失信息。含对象导航、关系图或宽表的交互报告先按 `design-ui` 的 L0 选择布局，不因名称含“报告”就套用散文布局。
+从上下文取得目标页面或组件、读者任务、已有设计约束及参照；图片任务还需实际资源和显示用途，模板任务需区分当次复用与长期收藏。只补问会影响当前执行的缺失信息。设计或改变对象比较任务时，先按 [按可见属性比较对象](references/reading-principles.md#按可见属性比较对象) 比较排序入口与独立字段的呈现，并将同一任务接到实际使用验证。含对象导航、关系图或宽表的交互报告先按 `design-ui` 的 L0 选择布局，不因名称含“报告”就套用散文布局。
 
 “基于网站 X 创建视觉风格／场景模板”进入 `create-ui-template`，不要求先提供待改造产品。
 
